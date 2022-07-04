@@ -1,6 +1,7 @@
 ﻿using System;
 using C1Tabuleiro;
 using C2Xadrez;
+using Exceptions;
 
 namespace chess
 {
@@ -8,12 +9,19 @@ namespace chess
     {
         static void Main(string[] args)
         {
-            Tabuleiro tab = new Tabuleiro(8, 8);
+            try
+            {
+                Tabuleiro tab = new Tabuleiro(8, 8);
 
-            tab.ColocarPeca(new Rei(tab, 0), new Posicao(2, 4));
+                tab.ColocarPeca(new Rei(tab, 0), new Posicao(2, 4));
 
 
-            Tela.ImprimirTabuleiro(tab);
+                Tela.ImprimirTabuleiro(tab);
+            }
+            catch (BoardException ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
         }
     }
 }
