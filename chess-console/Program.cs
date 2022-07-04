@@ -9,7 +9,13 @@ namespace chess
     {
         static void Main(string[] args)
         {
-            try
+            PosicaoXadrez pos = new('a', 1);
+            Console.WriteLine(pos);
+
+            Posicao pos2 = pos.toPosicao();
+            Console.WriteLine(pos2);
+
+            /*try
             {
                 Tabuleiro tab = new Tabuleiro(8, 8);
 
@@ -21,7 +27,7 @@ namespace chess
             catch (BoardException ex)
             {
                 Console.WriteLine(ex.Message);
-            }
+            }*/
         }
     }
 }
