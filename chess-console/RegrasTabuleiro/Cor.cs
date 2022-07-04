@@ -4,9 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace chess_console.Tabuleiro
+namespace RegrasTabuleiro
 {
-    internal class Tabuleiro
+    enum Cor
     {
+        Branca,
+        Preta
     }
 }
