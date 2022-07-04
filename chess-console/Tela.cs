@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using RegrasTabuleiro;
+using C1Tabuleiro;
 
-namespace chess_console
+namespace chess
 {
     internal class Tela
     {

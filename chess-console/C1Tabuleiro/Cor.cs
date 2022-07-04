@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace RegrasTabuleiro
+namespace C1Tabuleiro
 {
     enum Cor
     {

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace RegrasTabuleiro
+namespace C1Tabuleiro
 {
     internal class Tabuleiro
     {
@@ -23,6 +23,11 @@ namespace RegrasTabuleiro
         public Peca BuscaPeca( int linha, int coluna)
         {
             return Pecas[linha, coluna];
+        }
+
+        public void ColocarPeca(Peca p, Posicao pos)
+        {
+            Pecas[pos.Linha, pos.Coluna] = p;
         }
     }
 }

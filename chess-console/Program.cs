@@ -1,7 +1,8 @@
 ﻿using System;
-using RegrasTabuleiro;
+using C1Tabuleiro;
+using C2Xadrez;
 
-namespace chess_console
+namespace chess
 {
     class Program
     {
@@ -9,8 +10,10 @@ namespace chess_console
         {
             Tabuleiro tab = new Tabuleiro(8, 8);
 
-            Tela.ImprimirTabuleiro(tab);
+            tab.ColocarPeca(new Rei(tab, 0), new Posicao(2, 4));
 
+
+            Tela.ImprimirTabuleiro(tab);
         }
     }
 }
