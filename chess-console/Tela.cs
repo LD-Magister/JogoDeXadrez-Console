@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using C1Tabuleiro;
+using C2Xadrez;
 
 namespace chess
 {
@@ -30,7 +31,7 @@ namespace chess
                 Console.WriteLine();
             }
             Console.ForegroundColor = ConsoleColor.DarkCyan;
-            Console.Write("  A B C D E F G H");
+            Console.WriteLine("  A B C D E F G H");
             Console.ForegroundColor = ConsoleColor.Gray;
         }
 
@@ -48,6 +49,14 @@ namespace chess
                 Console.Write(peca + " ");
                 Console.ForegroundColor = ConsoleColor.Gray;
             }
+        }
+
+        public static Posicao LerPosicaoXadrez()
+        {
+            string s = Console.ReadLine();
+            char coluna = s[0];
+            int linha = int.Parse(s[1] + "");
+            return new PosicaoXadrez(coluna, linha).toPosicao();
         }
     }
 }

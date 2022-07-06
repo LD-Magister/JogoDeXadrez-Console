@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using C2Xadrez;
 using Exceptions;
 
 namespace C1Tabuleiro
@@ -45,6 +46,22 @@ namespace C1Tabuleiro
                 throw new BoardException("Já existe uma peça nessa posição");
             }
             Pecas[pos.Linha, pos.Coluna] = p;
+        }
+
+        public Peca RetirarPeca(Posicao pos)
+        {
+            if (BuscaPeca(pos) == null)
+            {
+                return null;
+            }
+            else
+            {
+                Peca aux = BuscaPeca(pos);
+                aux.Posicao = null;
+                Pecas[pos.Linha, pos.Coluna] = null;
+                return aux;
+            }
+
         }
 
         public bool PosicaoValida(Posicao pos)

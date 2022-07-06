@@ -11,15 +11,21 @@ namespace chess
         {
             try
             {
-                Tabuleiro tab = new Tabuleiro(8, 8);
+                PartidaDeXadrez partida = new PartidaDeXadrez();
 
-                tab.ColocarPeca(new Torre(tab, Cor.Branca), new Posicao(2, 4));
-                tab.ColocarPeca(new Rei(tab, Cor.Branca), new Posicao(7, 0));
-                tab.ColocarPeca(new Torre(tab, Cor.Preta), new Posicao(3, 5));
-                tab.ColocarPeca(new Rei(tab, Cor.Preta), new Posicao(2, 7));
+                while (!partida.Terminada)
+                {
+                    Console.Clear();
+                    Tela.ImprimirTabuleiro(partida.Tab);
 
+                    Console.WriteLine();
+                    Console.Write("Origem: ");
+                    Posicao origem = Tela.LerPosicaoXadrez();
+                    Console.Write("Destino: ");
+                    Posicao destino = Tela.LerPosicaoXadrez();
 
-                Tela.ImprimirTabuleiro(tab);
+                    partida.ExecutaMovimento(origem, destino);
+                }                
             }
             catch (BoardException ex)
             {

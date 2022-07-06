@@ -20,5 +20,10 @@ namespace C1Tabuleiro
             Tabuleiro = tabuleiro;
             QtdeMovimentos = 0;
         }
+
+        public void IncrementarQtdeMovimentos()
+        {
+            QtdeMovimentos++;
+        }
     }
 }

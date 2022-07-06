@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using C1Tabuleiro;
+using C2Xadrez;
 
 namespace C1Tabuleiro
 {
