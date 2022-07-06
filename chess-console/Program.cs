@@ -21,8 +21,11 @@ namespace chess
                     Console.WriteLine();
                     Console.Write("Origem: ");
                     Posicao origem = Tela.LerPosicaoXadrez();
+
+                    bool[,] marcacao = partida.Tab.BuscaPeca(origem).MovimentosPossiveis();
                     Console.Write("Destino: ");
                     Posicao destino = Tela.LerPosicaoXadrez();
+                    marcacao = null;
 
                     partida.ExecutaMovimento(origem, destino);
                 }                

@@ -15,18 +15,11 @@ namespace chess
             for (int i = 0; i < tab.Linhas; i++)
             {
                 Console.ForegroundColor = ConsoleColor.DarkCyan;
-                Console.Write(8-i + " ");
+                Console.Write(8 - i + " ");
                 Console.ForegroundColor = ConsoleColor.Gray;
                 for (int j = 0; j < tab.Colunas; j++)
                 {
-                    if (tab.BuscaPeca(i, j) == null)
-                    {
-                        Console.Write("- ");
-                    }
-                    else
-                    {
-                        ImprimePeca(tab.BuscaPeca(i, j));                        
-                    }                    
+                    ImprimePeca(tab.BuscaPeca(i, j));
                 }
                 Console.WriteLine();
             }
@@ -37,17 +30,25 @@ namespace chess
 
         public static void ImprimePeca(Peca peca)
         {
-            if (peca.Cor == 0)
+            if (peca == null)
             {
-                Console.ForegroundColor = ConsoleColor.White;
-                Console.Write(peca + " ");
-                Console.ForegroundColor = ConsoleColor.Gray;
+                Console.Write("- ");
             }
             else
             {
-                Console.ForegroundColor = ConsoleColor.DarkYellow;
-                Console.Write(peca + " ");
-                Console.ForegroundColor = ConsoleColor.Gray;
+                if (peca.Cor == 0)
+                {
+                    Console.ForegroundColor = ConsoleColor.White;
+                    Console.Write(peca + " ");
+                    Console.ForegroundColor = ConsoleColor.Gray;
+                }
+                else
+                {
+                    Console.ForegroundColor = ConsoleColor.DarkYellow;
+                    Console.Write(peca + " ");
+                    Console.ForegroundColor = ConsoleColor.Gray;
+                }
+                Console.Write(" ");
             }
         }
 
@@ -57,6 +58,6 @@ namespace chess
             char coluna = s[0];
             int linha = int.Parse(s[1] + "");
             return new PosicaoXadrez(coluna, linha).toPosicao();
-        }
+        }       
     }
 }

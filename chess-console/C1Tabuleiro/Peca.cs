@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace C1Tabuleiro
 {
-    internal class Peca
+    abstract internal class Peca
     {
         public Posicao Posicao { get; set; }
         public Tabuleiro Tabuleiro { get; set; }
@@ -25,5 +25,13 @@ namespace C1Tabuleiro
         {
             QtdeMovimentos++;
         }
+
+        protected bool PodeMover(Posicao pos)
+        {
+            Peca p = Tabuleiro.BuscaPeca(pos);
+            return p == null || p.Cor != Cor;
+        }
+
+        public abstract bool[,] MovimentosPossiveis();        
     }
 }
