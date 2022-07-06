@@ -8,7 +8,7 @@ namespace C1Tabuleiro
 {
     enum Cor
     {
-        Branca,
-        Preta
+        Branca = 0,
+        Preta = 1
     }
 }
