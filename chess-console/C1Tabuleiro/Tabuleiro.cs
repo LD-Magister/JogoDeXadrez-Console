@@ -46,6 +46,7 @@ namespace C1Tabuleiro
                 throw new BoardException("Já existe uma peça nessa posição");
             }
             Pecas[pos.Linha, pos.Coluna] = p;
+            p.Posicao = pos;
         }
 
         public Peca RetirarPeca(Posicao pos)

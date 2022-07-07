@@ -17,7 +17,7 @@ namespace C2Xadrez
         public override bool[,] MovimentosPossiveis()
         {
             bool[,] aux = new bool[Tabuleiro.Linhas, Tabuleiro.Colunas];
-            Posicao pos = new Posicao(0, 0);
+            Posicao pos = new Posicao(1, 1);
 
             //Acima
             pos.DefinirValores(Posicao.Linha - 1, Posicao.Coluna);
