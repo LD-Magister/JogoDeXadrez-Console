@@ -26,6 +26,11 @@ namespace C1Tabuleiro
             QtdeMovimentos++;
         }
 
+        public void ReduzirQtdeMovimentos()
+        {
+            QtdeMovimentos--;
+        }
+
         protected bool PodeMover(Posicao pos)
         {
             Peca p = Tabuleiro.BuscaPeca(pos);
