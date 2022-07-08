@@ -10,13 +10,13 @@ namespace C1Tabuleiro
     {
         public Posicao Posicao { get; set; }
         public Tabuleiro Tabuleiro { get; set; }
-        public Cor Cor { get; set; }        
-        public int QtdeMovimentos { get; set; }        
+        public Cor Cor { get; set; }
+        public int QtdeMovimentos { get; set; }
 
         public Peca(Tabuleiro tabuleiro, Cor cor)
         {
             Posicao = null;
-            Cor = cor;            
+            Cor = cor;
             Tabuleiro = tabuleiro;
             QtdeMovimentos = 0;
         }
@@ -32,6 +32,27 @@ namespace C1Tabuleiro
             return p == null || p.Cor != Cor;
         }
 
-        public abstract bool[,] MovimentosPossiveis();        
+        public bool ExisteMovimentoPossivel()
+        {
+            bool[,] aux = MovimentosPossiveis();
+            for (int i = 0; i < Tabuleiro.Linhas; i++)
+            {
+                for (int j = 0; j < Tabuleiro.Colunas; j++)
+                {
+                    if (aux[i, j])
+                    {
+                        return true;
+                    }
+                }
+            }
+            return false;
+        }
+
+        public bool PodeMoverPara(Posicao pos)
+        {
+            return MovimentosPossiveis()[pos.Linha, pos.Coluna];
+        }
+
+        public abstract bool[,] MovimentosPossiveis();
     }
 }
