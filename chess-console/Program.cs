@@ -42,7 +42,9 @@ namespace chess
                         Console.WriteLine(ex.Message);
                         Console.ReadLine();
                     }                    
-                }                
+                }
+                Console.Clear();
+                Tela.ImprimirPartida(partida);
             }
             catch (BoardException ex)
             {

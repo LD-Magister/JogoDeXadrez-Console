@@ -33,7 +33,7 @@ namespace C2Xadrez
         public Peca ExecutaMovimento(Posicao origem, Posicao destino)
         {
             Peca p = Tab.RetirarPeca(origem);
-            p.IncrementarQtdeMovimentos();            
+            p.IncrementarQtdeMovimentos();
             Peca pecaCapturada = Tab.RetirarPeca(destino);
             Tab.ColocarPeca(p, destino);
             if (pecaCapturada != null)
@@ -70,11 +70,18 @@ namespace C2Xadrez
             }
             else
             {
-                Xeque =false;
+                Xeque = false;
             }
 
-            Turno++;
-            MudaJogador();
+            if (TesteXequeMate(Adversaria(JogadorAtual)))
+            {
+                Terminada = true;
+            }
+            else
+            {
+                Turno++;
+                MudaJogador();
+            }
         }
 
         public void ValidaPosicaoOrigem(Posicao pos)
@@ -159,7 +166,7 @@ namespace C2Xadrez
                 if (peca is Rei)
                 {
                     return peca;
-                }                
+                }
             }
             return null;
         }
@@ -178,6 +185,38 @@ namespace C2Xadrez
             return false;
         }
 
+        public bool TesteXequeMate(Cor cor)
+        {
+            if (!EstaEmXeque(cor))
+            {
+                return false;
+            }
+            foreach (Peca peca in PecasEmJogo(cor))
+            {
+                bool[,] aux = peca.MovimentosPossiveis();
+
+                for (int i = 0; i < Tab.Linhas; i++)
+                {
+                    for (int j = 0; j < Tab.Colunas; j++)
+                    {
+                        if (aux[i, j])
+                        {
+                            Posicao origem = peca.Posicao;
+                            Posicao destino = new Posicao(i, j);
+                            Peca pecaCapurada = ExecutaMovimento(origem, destino);
+                            bool testeXeque = EstaEmXeque(cor);
+                            DesfazMovimento(origem, destino, pecaCapurada);
+                            if (!testeXeque)
+                            {
+                                return false;
+                            }
+                        }
+                    }
+                }
+            }
+            return true;
+        }
+
         public void AdicionarNovaPeca(char coluna, int linha, Peca peca)
         {
             Tab.ColocarPeca(peca, new PosicaoXadrez(coluna, linha).toPosicao());
@@ -187,18 +226,18 @@ namespace C2Xadrez
         private void AdicionarPecas()
         {
             AdicionarNovaPeca('c', 1, new Torre(Tab, Cor.Branca));
-            AdicionarNovaPeca('c', 2, new Torre(Tab, Cor.Branca));
-            AdicionarNovaPeca('d', 2, new Torre(Tab, Cor.Branca));
-            AdicionarNovaPeca('e', 2, new Torre(Tab, Cor.Branca));
-            AdicionarNovaPeca('e', 1, new Torre(Tab, Cor.Branca));
+            //AdicionarNovaPeca('c', 2, new Torre(Tab, Cor.Branca));
+            //AdicionarNovaPeca('d', 2, new Torre(Tab, Cor.Branca));
+            //AdicionarNovaPeca('e', 2, new Torre(Tab, Cor.Branca));
+            AdicionarNovaPeca('h', 7, new Torre(Tab, Cor.Branca));
             AdicionarNovaPeca('d', 1, new Rei(Tab, Cor.Branca));
 
-            AdicionarNovaPeca('c', 7, new Torre(Tab, Cor.Preta));
-            AdicionarNovaPeca('c', 8, new Torre(Tab, Cor.Preta));
-            AdicionarNovaPeca('d', 7, new Torre(Tab, Cor.Preta));
-            AdicionarNovaPeca('e', 7, new Torre(Tab, Cor.Preta));
-            AdicionarNovaPeca('e', 8, new Torre(Tab, Cor.Preta));
-            AdicionarNovaPeca('d', 8, new Rei(Tab, Cor.Preta));
+            //AdicionarNovaPeca('c', 7, new Torre(Tab, Cor.Preta));
+            //AdicionarNovaPeca('c', 8, new Torre(Tab, Cor.Preta));
+            //AdicionarNovaPeca('d', 7, new Torre(Tab, Cor.Preta));
+            //AdicionarNovaPeca('e', 7, new Torre(Tab, Cor.Preta));
+            AdicionarNovaPeca('b', 8, new Torre(Tab, Cor.Preta));
+            AdicionarNovaPeca('a', 8, new Rei(Tab, Cor.Preta));
         }
     }
 }
