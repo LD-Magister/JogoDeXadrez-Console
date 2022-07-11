@@ -9,9 +9,11 @@ namespace C2Xadrez
 {
     internal class Peao : Peca
     {
-        public Peao(Tabuleiro tabuleiro, Cor cor) : base(tabuleiro, cor)
-        {
+        public PartidaDeXadrez Partida { get; private set; }
 
+        public Peao(Tabuleiro tabuleiro, Cor cor, PartidaDeXadrez partida) : base(tabuleiro, cor)
+        {
+            Partida = partida;
         }
 
         private bool ExisteInimigo(Posicao pos)
@@ -59,6 +61,21 @@ namespace C2Xadrez
                 {
                     aux[pos.Linha, pos.Coluna] = true;
                 }
+
+                //#jogadaespecial En Passant Esquerda
+                pos.DefinirValores(Posicao.Linha, Posicao.Coluna -1);                
+                if (Tabuleiro.PosicaoValida(pos) && ExisteInimigo(pos) && Tabuleiro.BuscaPeca(pos) == Partida.PodeEnPassant)
+                {
+                    aux[pos.Linha - 1, pos.Coluna] = true;
+                }
+
+                //#jogadaespecial En Passant Direita
+                pos.DefinirValores(Posicao.Linha, Posicao.Coluna + 1);
+                if (Tabuleiro.PosicaoValida(pos) && ExisteInimigo(pos) && Tabuleiro.BuscaPeca(pos) == Partida.PodeEnPassant)
+                {
+                    aux[pos.Linha - 1, pos.Coluna] = true;
+                }
+
             }
             else
             {
@@ -88,6 +105,20 @@ namespace C2Xadrez
                 if (Tabuleiro.PosicaoValida(pos) && ExisteInimigo(pos))
                 {
                     aux[pos.Linha, pos.Coluna] = true;
+                }
+
+                //#jogadaespecial En Passant Esquerda
+                pos.DefinirValores(Posicao.Linha, Posicao.Coluna - 1);
+                if (Tabuleiro.PosicaoValida(pos) && ExisteInimigo(pos) && Tabuleiro.BuscaPeca(pos) == Partida.PodeEnPassant)
+                {
+                    aux[pos.Linha + 1, pos.Coluna] = true;
+                }
+
+                //#jogadaespecial En Passant Direita
+                pos.DefinirValores(Posicao.Linha, Posicao.Coluna + 1);
+                if (Tabuleiro.PosicaoValida(pos) && ExisteInimigo(pos) && Tabuleiro.BuscaPeca(pos) == Partida.PodeEnPassant)
+                {
+                    aux[pos.Linha + 1, pos.Coluna] = true;
                 }
             }
 
