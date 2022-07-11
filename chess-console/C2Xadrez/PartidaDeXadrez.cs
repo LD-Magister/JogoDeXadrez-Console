@@ -79,7 +79,7 @@ namespace C2Xadrez
                     }
                     pecaCapturada = Tab.RetirarPeca(posPeaoInimigo);
                     Capturadas.Add(pecaCapturada);
-                }                
+                }
             }
 
             return pecaCapturada;
@@ -140,11 +140,54 @@ namespace C2Xadrez
         public void RealizaJogada(Posicao origem, Posicao destino)
         {
             Peca pecaCapturada = ExecutaMovimento(origem, destino);
+            Peca pecaMovida = Tab.BuscaPeca(destino);
+
             if (EstaEmXeque(JogadorAtual))
             {
                 DesfazMovimento(origem, destino, pecaCapturada);
                 throw new BoardException("Você não pode se colocar em xeque");
             }
+
+            if (pecaMovida is Peao)
+            {
+                if ((pecaMovida.CorPeca == Cor.Branca && destino.Linha == 0) || (pecaMovida.CorPeca == Cor.Preta && destino.Linha == 7))
+                {
+
+                    Peca pecaProm;
+                    Console.WriteLine("Selecione uma promoção:");
+                    Console.WriteLine("d - Dama");
+                    Console.WriteLine("b - Bispo");
+                    Console.WriteLine("c - Cavalo");
+                    Console.WriteLine("t - Torre");
+                    char escolhaPromocao = char.Parse(Console.ReadLine());
+
+                    switch (escolhaPromocao)
+                    {
+                        case 'd':
+                            pecaProm = new Dama(Tab, pecaMovida.CorPeca);
+                            break;
+                        case 'b':
+                            pecaProm = new Bispo(Tab, pecaMovida.CorPeca);
+                            break;
+                        case 'c':
+                            pecaProm = new Cavalo(Tab, pecaMovida.CorPeca);
+                            break;
+                        case 't':
+                            pecaProm = new Torre(Tab, pecaMovida.CorPeca);
+                            break;
+                        default:
+                            Console.WriteLine("Valor selecionado inválido, peça será promovida para Dama");
+                            pecaProm = new Dama(Tab, pecaMovida.CorPeca);
+                            break;
+                    }
+
+                    Tab.RetirarPeca(destino);
+                    Pecas.Remove(pecaMovida);
+                    Tab.ColocarPeca(pecaProm, destino);
+                    Pecas.Add(pecaProm);
+                }
+            }
+
 
             if (EstaEmXeque(Adversaria(JogadorAtual)))
             {
@@ -166,7 +209,7 @@ namespace C2Xadrez
             }
 
             //#jogadaespecial En Passant
-            Peca pecaMovida = Tab.BuscaPeca(destino);
+
             if (pecaMovida is Peao && (destino.Linha == origem.Linha - 2 || destino.Linha == origem.Linha + 2))
             {
                 PodeEnPassant = pecaMovida;
