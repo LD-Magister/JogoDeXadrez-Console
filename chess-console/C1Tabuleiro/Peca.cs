@@ -10,13 +10,13 @@ namespace C1Tabuleiro
     {
         public Posicao Posicao { get; set; }
         public Tabuleiro Tabuleiro { get; set; }
-        public Cor Cor { get; set; }
+        public Cor CorPeca { get; private set; }
         public int QtdeMovimentos { get; set; }
 
         public Peca(Tabuleiro tabuleiro, Cor cor)
         {
             Posicao = null;
-            Cor = cor;
+            CorPeca = cor;
             Tabuleiro = tabuleiro;
             QtdeMovimentos = 0;
         }
@@ -34,7 +34,7 @@ namespace C1Tabuleiro
         protected bool PodeMover(Posicao pos)
         {
             Peca p = Tabuleiro.BuscaPeca(pos);
-            return p == null || p.Cor != Cor;
+            return p == null || p.CorPeca != CorPeca;
         }
 
         public bool ExisteMovimentoPossivel()
@@ -53,7 +53,7 @@ namespace C1Tabuleiro
             return false;
         }
 
-        public bool PodeMoverPara(Posicao pos)
+        public bool PossivelMovimento(Posicao pos)
         {
             return MovimentosPossiveis()[pos.Linha, pos.Coluna];
         }

@@ -115,7 +115,7 @@ namespace chess
             }
             else
             {
-                if (peca.Cor == 0)
+                if (peca.CorPeca == 0)
                 {
                     Console.ForegroundColor = ConsoleColor.White;
                     Console.Write(peca + " ");
